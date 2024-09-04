@@ -65,3 +65,55 @@ list.insertAtEnd(20);
 
 
 console.log(list)
+
+
+//Insert in a given node
+
+
+LinkedList.prototype.insertAfter = function (prevNode, data) {
+      //In this function we are taking prevNode and data which we need to add:---
+     // after that we are checking prevnode can't be pointing to null;   
+    if (!prevNode) {
+        console.log("The given prev node cannot be null");
+    }
+    //creating newNode with new data
+    const newNode = new Node(data, prevNode.next)
+
+    //After that assigning prevnode.next refrance to newNode;
+    prevNode.next = newNode
+}
+
+// Delete operation
+//delete first node
+
+LinkedList.prototype.deleteFirstNode = function () {
+    if (!this.head) {
+        return;
+    }
+    this.head = this.head.next;
+}
+
+
+//delete last node (second last node )
+
+
+LinkedList.prototype.deleteLastNode = function () {
+    if (!this.head) {
+        return;//nothing to delete if we have list is empty
+    }
+    if (!this.head.next) {
+        this.head = null;//if there is only one node;
+        return;
+    }
+
+    //first we are assuming second last is the head 
+
+    let secondlast = this.head;
+    //After that see we are lopping to check wheather we have value to the last element refrance 
+    //if we fine node is refering to value we are moving our second last to next value and keep checking over there;
+    while (secondlast.next.next) {
+        secondlast = secondlast.next;
+    }
+    //if loop breaks the we know we have last value which refrance is pointing to null so that we are directly deleting the lastvalue by putting null 
+    secondlast.next = null;
+}
